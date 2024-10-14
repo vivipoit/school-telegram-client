@@ -1,0 +1,4 @@
+export SESSION_STRING=bigLongStringFromStringSessionSteps
+export API_ID=12345678
+export API_HASH=HASHYhash01234567890
+export LAMBDA_URL='this one is optional'
