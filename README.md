@@ -19,33 +19,11 @@ Follow the steps below to run the `create_group.py` script with its static strin
 
 ## Run on AWS Lambda
 
-The code in `aws/lambda_function.py` is a bit more sophisticated, because instead of static string values, it expects the AWS Lambda event to have a body similar to this:
-
-```json
-{
-  "course": {
-    "id": 9,
-    "subject": "math",
-    "teacher_email_address": "this@teacher.com"
-  }
-}
-```
-
-The function uses the information in the body to build the group's and the link's titles.
-
-### Example:
-
-#### Request:
-
-`curl -v -d '{"course":{"id": 9,"subject":"math","teacher_email_address":"this@teacher.com"}}' $LAMBDA_URL -H "Content-Type: application/json"`
-
-#### Title for group to be created:
-
-`"math with this@teacher.com (#9)"`
-
-### AWS Lambda layer for loading Telethon
+The code in `aws/lambda_function.py` is a bit more sophisticated, because instead of static string values, it expects the AWS Lambda event to have a body that provides the `group_title` and `link_title`.
 
 `aws/telethon_layer.zip` is a file that can be uploaded as the layer for the function to use.
+
+Sample request: `curl -v -d '{"group_title":"The coolest group!","link_title":"join-the-coolest-group"}' $LAMBDA_URL -H "Content-Type: application/json"`
 
 # Cheatsheet
 
